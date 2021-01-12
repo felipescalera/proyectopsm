@@ -1,4 +1,3 @@
-IN=imread('frutas/naranjas.jpg');
 [filas, cols, canales]=size(IN);
 imshow(IN);
 
@@ -29,5 +28,20 @@ imshow(B);
 
 imshow(IN);
 
+IN=imread('frutas/naranjas.jpg');
+HLSconv(IN);
 
-showHistoHLS(IN);
+IN=imread('frutas/arandanos.jpeg');
+HLSconv(IN);
+
+IN=imread('frutas/fresas.jpg');
+HLSconv(IN);
+
+IN=imread('frutas/limas.jpg');
+HLSconv(IN);
+
+IN=imread('frutas/platanos.jpg');
+HLSconv(IN);
+
+IN=imread('frutas/uvas_moradas.jpg');
+HLSconv(IN);

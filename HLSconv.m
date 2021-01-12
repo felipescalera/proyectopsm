@@ -1,12 +1,11 @@
-function showHisto(h,niveles)
-  R = IN(:,:,1); 
+function HLSconv(IN)
+R = IN(:,:,1); 
 
 G = IN(:,:,2);
 
 B = IN(:,:,3);
 
-
-
+[filas, cols, canales]=size(IN);
 
 Rnorm = normaliza(R); 
 
