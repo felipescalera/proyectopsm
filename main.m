@@ -28,20 +28,25 @@ imshow(B);
 
 imshow(IN);
 
-IN=imread('frutas/naranjas.jpg');
+clc;
+clear all;
+IN=imread('frutas/arandanos.jpg');
 HLSconv(IN);
 
-IN=imread('frutas/arandanos.jpeg');
-HLSconv(IN);
+IN1=imread('frutas/cerezas.jpg');
+HLSconv(IN1);
 
-IN=imread('frutas/fresas.jpg');
-HLSconv(IN);
+IN2=imread('frutas/fresas.jpg');
+HLSconv(IN2);
 
-IN=imread('frutas/limas.jpg');
-HLSconv(IN);
+IN3=imread('frutas/lima.jpg');
+HLSconv(IN3);
 
-IN=imread('frutas/platanos.jpg');
-HLSconv(IN);
+IN4=imread('frutas/naranjas.jpg');
+HLSconv(IN4);
 
-IN=imread('frutas/uvas_moradas.jpg');
-HLSconv(IN);
+IN5=imread('frutas/platano.jpg');
+HLSconv(IN5);
+
+IN6=imread('frutas/sandia.jpg');
+HLSconv(IN6);
