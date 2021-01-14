@@ -95,6 +95,20 @@ IN6=imread('frutas/sandia.jpg');
 hh6=HLSconvVECTOR(IN6);
 OUT6=queFrutaEs(hh6,IN6);
 
-IN7=imread('frutas/prueba.jpg');
-hh7=HLSconvVECTOR(IN7);
-OUT7=queFrutaEs(hh7,IN7);
+IN71=imread('frutas/prueba.jpg');
+hh71=HLSconvVECTOR(IN71);
+OUT71=queFrutaEs(hh71,IN71);
+
+IN72=imread('frutas/siguienteprueba.jpg');
+hh72=HLSconvVECTOR(IN72);
+OUT72=queFrutaEs(hh72,IN72);
+
+IN73=imread('frutas/ultimaprueba.jpg');
+hh73=HLSconvVECTOR(IN73);
+OUT73=queFrutaEs(hh73,IN73);
+
+IN=imread('frutas/arandanos.jpg');
+imshow(IN);
+treshold = 150;
+
+bwimage = Binarizacion(IN, treshold);

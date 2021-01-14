@@ -32,7 +32,7 @@ function tipoFruta = queFrutaEs(hh,IN)
       pixelesParaFresa = pixelesParaFresa + hh(i+1);
     elseif (i >= 29) && (i <= 38)
       pixelesParaNaranja = pixelesParaNaranja + hh(i+1);
-    elseif (i >= 39) && (i <= 46)
+    elseif (i >= 39) && (i <= 64)
       pixelesParaPlatano = pixelesParaPlatano + hh(i+1);
     elseif (i >= 214) && (i <= 228)
       pixelesParaArandanos = pixelesParaArandanos + hh(i+1);
@@ -68,6 +68,7 @@ function tipoFruta = queFrutaEs(hh,IN)
   porcentajeColorAzulOscuro = (pixelesAzulOscuro/suma)*100;
   porcentajeColorRosa = (pixelesRosas/suma)*100;
   porcentajeColorRojoOscuro = (pixelesRojoOscuro/suma)*100;
+  colorFinal = 'Mezcla de frutas';
   
     if ((porcentajeColorRojoClaro >= 40) && (porcentajeColorNaranja < 10) 
       && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 16) && (porcentajeColorCyan < 10)
@@ -113,7 +114,7 @@ function tipoFruta = queFrutaEs(hh,IN)
     porcentajeArandanos = (pixelesParaArandanos/suma)*100;
     frutaFinal = '';
 
-    if(strcmp(colorFinal,'mezcla de frutas') == 0)
+    if(strcmp(colorFinal,'Mezcla de frutas') == 0)
       if ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
         && (porcentajeSandia < 5) && (porcentajeLima < 5) && (porcentajeArandanos >= 65))
         frutaFinal = 'Arandanos';
@@ -141,7 +142,15 @@ function tipoFruta = queFrutaEs(hh,IN)
       c = 0;
     endif
     
+      tipoFruta = zeros(1,7);
+  tipoFruta(1) = porcentajeArandanos;
+  tipoFruta(2) = porcentajeCereza;
+  tipoFruta(3) = porcentajeFresa;
+  tipoFruta(4) = porcentajeLima;
+  tipoFruta(5) = porcentajeNaranja;
+  tipoFruta(6) = porcentajePlatano;
+  tipoFruta(7) = porcentajeSandia;
+    
     disp(frutaFinal);
-    tipoFruta = 0;
   
 endfunction
