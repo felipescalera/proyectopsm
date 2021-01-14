@@ -67,27 +67,34 @@ I6
 porcentaje6
 
 
+IN=imread('frutas/arandanos.jpg');
 hh=HLSconvVECTOR(IN);
 OUT=queFrutaEs(hh,IN);
 
-hh=HLSconvVECTOR(IN1);
-OUT1=queFrutaEs(hh,IN1);
+IN1=imread('frutas/cerezas.jpg');
+hh1=HLSconvVECTOR(IN1);
+OUT1=queFrutaEs(hh1,IN1);
 
-hh=HLSconvVECTOR(IN2);
-OUT2=queFrutaEs(hh,IN2);
+IN2=imread('frutas/fresas.jpg');
+hh2=HLSconvVECTOR(IN2);
+OUT2=queFrutaEs(hh2,IN2);
 
-hh=HLSconvVECTOR(IN3);
-OUT3=queFrutaEs(hh,IN3);
+IN3=imread('frutas/lima.jpg');
+hh3=HLSconvVECTOR(IN3);
+OUT3=queFrutaEs(hh3,IN3);
 
-hh=HLSconvVECTOR(IN4);
-OUT4=queFrutaEs(hh,IN4);
+IN4=imread('frutas/naranja.jpg');
+hh4=HLSconvVECTOR(IN4);
+OUT4=queFrutaEs(hh4,IN4);
 
-hh=HLSconvVECTOR(IN5);
-OUT5=queFrutaEs(hh,IN5);
+IN5=imread('frutas/platano.jpg');
+hh5=HLSconvVECTOR(IN5);
+OUT5=queFrutaEs(hh5,IN5);
 
-hh=HLSconvVECTOR(IN6);
-OUT6=queFrutaEs(hh,IN6);
+IN6=imread('frutas/sandia.jpg');
+hh6=HLSconvVECTOR(IN6);
+OUT6=queFrutaEs(hh6,IN6);
 
-IN=imread('frutas/prueba.jpg');
-hh=HLSconvVECTOR(IN);
-OUT=queFrutaEs(hh,IN);
+IN7=imread('frutas/prueba.jpg');
+hh7=HLSconvVECTOR(IN7);
+OUT7=queFrutaEs(hh7,IN7);
