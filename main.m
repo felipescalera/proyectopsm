@@ -109,6 +109,28 @@ OUT73=queFrutaEs(hh73,IN73);
 
 IN=imread('frutas/arandanos.jpg');
 imshow(IN);
-treshold = 150;
 
-bwimage = Binarizacion(IN, treshold);
+
+grayim = rgb2gray(IN);
+grayHisto = gHistogram(grayim,1);
+threshold = MVThreshold(grayHisto);
+bwimage = Binarizacion(grayim, threshold);
+imshow(bwimage);
+
+grayim5 = rgb2gray(IN5);
+grayHisto5 = gHistogram(grayim5,1);
+threshold5 = MVThreshold(grayHisto5);
+bwimage5 = Binarizacion(grayim5, threshold5);
+imshow(bwimage5);
+
+
+
+bordergrayim = imBorder(bwimage);
+grayHisto = gHistogram(bordergrayim,1);
+threshold = MVThreshold(grayHisto);
+bwimage = Binarizacion(bordergrayim, threshold);
+aux1 = calculaPerimetro(bordergrayim);
+
+bordergrayim5 = imBorder(bwimage5);
+imshow(bordergrayim5);
+aux = calculaPerimetro(bordergrayim5);
