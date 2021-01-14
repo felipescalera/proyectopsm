@@ -1,33 +1,3 @@
-[filas, cols, canales]=size(IN);
-imshow(IN);
-
-h=histogram(IN,1);
-figure(2);
-showHisto(h);
-
-h=histogram(IN,2);
-figure(3);
-showHisto(h);
-
-h=histogram(IN,3);
-figure(4);
-showHisto(h);
-
-[R, G, B] = Canales(IN);
-
-figure();
-imshow(R);
-
-figure();
-imshow(G);
-
-figure();
-imshow(B);
-
-[filas, cols, canales] = size(IN);
-
-imshow(IN);
-
 clc;
 clear all;
 
@@ -69,7 +39,7 @@ porcentaje3 = M3/suma3;
 I3
 porcentaje3
 
-IN4=imread('frutas/naranjas.jpg');
+IN4=imread('frutas/naranja.jpg');
 HLSconv(IN4);
 salida4 = HLSconvVECTOR(IN4);
 [M4,I4] = max(salida4);
@@ -95,3 +65,29 @@ suma6 = sumatorio(salida6);
 porcentaje6 = M6/suma6;
 I6
 porcentaje6
+
+
+hh=HLSconvVECTOR(IN);
+OUT=queFrutaEs(hh,IN);
+
+hh=HLSconvVECTOR(IN1);
+OUT1=queFrutaEs(hh,IN1);
+
+hh=HLSconvVECTOR(IN2);
+OUT2=queFrutaEs(hh,IN2);
+
+hh=HLSconvVECTOR(IN3);
+OUT3=queFrutaEs(hh,IN3);
+
+hh=HLSconvVECTOR(IN4);
+OUT4=queFrutaEs(hh,IN4);
+
+hh=HLSconvVECTOR(IN5);
+OUT5=queFrutaEs(hh,IN5);
+
+hh=HLSconvVECTOR(IN6);
+OUT6=queFrutaEs(hh,IN6);
+
+IN=imread('frutas/prueba.jpg');
+hh=HLSconvVECTOR(IN);
+OUT=queFrutaEs(hh,IN);
