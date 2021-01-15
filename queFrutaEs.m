@@ -134,23 +134,104 @@ function tipoFruta = queFrutaEs(hh,IN)
         && (porcentajeSandia < 5) && (porcentajeLima < 5) && (porcentajeArandanos < 5))
         frutaFinal = 'Platano';
       elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
-        && (porcentajeSandia >= 55) && (porcentajeLima < 35) && (porcentajeArandanos < 5))
+        && (porcentajeSandia >= 45) && (porcentajeLima < 35) && (porcentajeArandanos < 5))
         frutaFinal = 'Sandia';
 
       endif
     else
-      c = 0;
+      colorFinal = 'Mezcla de: ';
+      if (porcentajeArandanos > 12)
+        frutaFinal = 'Arandanos';
+        colorFinal = strcat(colorFinal, ' Azul oscuro');
+      endif
+      if (porcentajeCereza > 12)
+        if(strcmp(frutaFinal,'') == 1)
+          frutaFinal = 'Cerezas';
+          colorFinal = strcat(colorFinal, ' Rojo oscuro');
+        else
+          frutita = ', cerezas';
+          frutaFinal = strcat(frutaFinal, frutita);
+          colorFinal = strcat(colorFinal, ', rojo oscuro');
+        endif
+      endif
+      if (porcentajeFresa > 12)
+        if(strcmp(frutaFinal,'') == 1)
+          frutaFinal = 'Fresas';
+          colorFinal = strcat(colorFinal, ' Rojo claro');
+        else
+          frutita = ', fresas';
+          frutaFinal = strcat(frutaFinal, frutita);
+          colorFinal = strcat(colorFinal, ', rojo claro');
+        endif
+      endif
+      if (porcentajeLima > 15)
+        if(strcmp(frutaFinal,'') == 1)
+          frutaFinal = 'Lima';
+          colorFinal = strcat(colorFinal, ' Verde lima');
+        else
+          frutita = ', lima';
+          frutaFinal = strcat(frutaFinal, frutita);
+          colorFinal = strcat(colorFinal, ', verde lima');
+        endif
+      endif
+      if (porcentajeNaranja > 12)
+        if(strcmp(frutaFinal,'') == 1)
+          frutaFinal = 'Naranja';
+          colorFinal = strcat(colorFinal, ' Naranja');
+        else
+          frutita = ', naranja';
+          frutaFinal = strcat(frutaFinal, frutita);
+          colorFinal = strcat(colorFinal, ', naranja');
+        endif
+      endif
+      if (porcentajePlatano > 12)
+        if(strcmp(frutaFinal,'') == 1)
+          frutaFinal = 'Platano';
+          colorFinal = strcat(colorFinal, ' Amarillo');
+        else
+          frutita = ', platano';
+          frutaFinal = strcat(frutaFinal, frutita);
+          colorFinal = strcat(colorFinal, ', amarillo');
+        endif
+      endif
+      if (porcentajeSandia > 15)
+        if(strcmp(frutaFinal,'') == 1)
+          frutaFinal = 'Sandia';
+          colorFinal = strcat(colorFinal, ' Verde oscuro');
+        else
+          frutita = ', sandia';
+          frutaFinal = strcat(frutaFinal, frutita);
+          colorFinal = strcat(colorFinal, ', verde oscuro');
+        endif
+      endif
     endif
     
-      tipoFruta = zeros(1,7);
-  tipoFruta(1) = porcentajeArandanos;
-  tipoFruta(2) = porcentajeCereza;
-  tipoFruta(3) = porcentajeFresa;
-  tipoFruta(4) = porcentajeLima;
-  tipoFruta(5) = porcentajeNaranja;
-  tipoFruta(6) = porcentajePlatano;
-  tipoFruta(7) = porcentajeSandia;
+    tipoFruta = zeros(1,7);
+    tipoFruta(1) = porcentajeArandanos;
+    tipoFruta(2) = porcentajeCereza;
+    tipoFruta(3) = porcentajeFresa;
+    tipoFruta(4) = porcentajeLima;
+    tipoFruta(5) = porcentajeNaranja;
+    tipoFruta(6) = porcentajePlatano;
+    tipoFruta(7) = porcentajeSandia;
     
-    disp(frutaFinal);
-  
+    
+    % Sacar el perimetro a raiz del perimetro
+    grayim = rgb2gray(IN);
+    grayHisto = gHistogram(grayim,1);
+    threshold = MVThreshold(grayHisto);
+    bwimage = Binarizacion(grayim, threshold);
+    bordergrayim = imBorder(bwimage);
+    
+    perimetroFruta = calculaPerimetro(bordergrayim);
+
+    fprintf('La imagen contiene una fruta del tipo: %s.\n', frutaFinal);
+    plural = isequal(strfind(colorFinal,','),[]);
+    if(plural == 0)
+      fprintf('Los colores principales de la imagen son: %s.\n', colorFinal);
+    else
+      fprintf('El color principal de la imagen es: %s.\n', colorFinal);
+    endif
+    fprintf('La fruta tiene un perímetro de %d píxeles.\n', perimetroFruta);
+
 endfunction

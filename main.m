@@ -69,11 +69,16 @@ porcentaje6
 
 IN=imread('frutas/arandanos.jpg');
 hh=HLSconvVECTOR(IN);
-OUT=queFrutaEs(hh,IN);
+[OUT,PER]=queFrutaEs(hh,IN);
+queFrutaEs(hh,IN);
 
 IN1=imread('frutas/cerezas.jpg');
 hh1=HLSconvVECTOR(IN1);
 OUT1=queFrutaEs(hh1,IN1);
+
+IN11=imread('frutas/cerezas2.jpg');
+hh11=HLSconvVECTOR(IN11);
+OUT11=queFrutaEs(hh11,IN11);
 
 IN2=imread('frutas/fresas.jpg');
 hh2=HLSconvVECTOR(IN2);
@@ -91,9 +96,17 @@ IN5=imread('frutas/platano.jpg');
 hh5=HLSconvVECTOR(IN5);
 OUT5=queFrutaEs(hh5,IN5);
 
+IN51=imread('frutas/platano2.jpg');
+hh51=HLSconvVECTOR(IN51);
+OUT51=queFrutaEs(hh51,IN51);
+
 IN6=imread('frutas/sandia.jpg');
 hh6=HLSconvVECTOR(IN6);
 OUT6=queFrutaEs(hh6,IN6);
+
+IN61=imread('frutas/sandia2.jpg');
+hh61=HLSconvVECTOR(IN61);
+OUT61=queFrutaEs(hh61,IN61);
 
 IN71=imread('frutas/prueba.jpg');
 hh71=HLSconvVECTOR(IN71);
@@ -107,6 +120,10 @@ IN73=imread('frutas/ultimaprueba.jpg');
 hh73=HLSconvVECTOR(IN73);
 OUT73=queFrutaEs(hh73,IN73);
 
+IN74=imread('frutas/combinacionfrutas4.jpg');
+hh74=HLSconvVECTOR(IN74);
+OUT74=queFrutaEs(hh74,IN74);
+
 IN=imread('frutas/arandanos.jpg');
 imshow(IN);
 
@@ -116,6 +133,7 @@ grayHisto = gHistogram(grayim,1);
 threshold = MVThreshold(grayHisto);
 bwimage = Binarizacion(grayim, threshold);
 imshow(bwimage);
+
 
 grayim5 = rgb2gray(IN5);
 grayHisto5 = gHistogram(grayim5,1);

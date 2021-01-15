@@ -1,4 +1,9 @@
-function histograma = calculaPerimetro(image)
+function sumaBlanco = calculaPerimetro(image)
   histograma = gHistogram(image,1);
-  perimetro = histograma(256);
+ 
+  sumaBlanco = 0;
+  for i = 1:255
+    sumaBlanco = sumaBlanco + histograma(i+1);
+  endfor
+    
 endfunction
