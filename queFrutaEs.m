@@ -1,6 +1,6 @@
 %% Función para sacar qué fruta es, pasando como entrada un histograma
 
-function tipoFruta = queFrutaEs(hh,IN)
+function queFrutaEs(hh,IN)
   
   % Calcular el número de pixeles de color de la foto
   pixelesParaFresa = 0;
@@ -19,6 +19,7 @@ function tipoFruta = queFrutaEs(hh,IN)
   pixelesAzulOscuro = 0;
   pixelesRosas = 0;
   pixelesRojoOscuro = 0;
+
   
   suma = 0;
   for i = 0:359
@@ -206,32 +207,50 @@ function tipoFruta = queFrutaEs(hh,IN)
       endif
     endif
     
-    tipoFruta = zeros(1,7);
-    tipoFruta(1) = porcentajeArandanos;
-    tipoFruta(2) = porcentajeCereza;
-    tipoFruta(3) = porcentajeFresa;
-    tipoFruta(4) = porcentajeLima;
-    tipoFruta(5) = porcentajeNaranja;
-    tipoFruta(6) = porcentajePlatano;
-    tipoFruta(7) = porcentajeSandia;
-    
-    
-    % Sacar el perimetro a raiz del perimetro
+    % Sacar el perimetro a
     grayim = rgb2gray(IN);
     grayHisto = gHistogram(grayim,1);
     threshold = MVThreshold(grayHisto);
-    bwimage = Binarizacion(grayim, threshold);
+    [bwimage,tam] = Binarizacion(grayim, threshold);
+    
+    figure(1);
+    subplot(2,2,1);
+    imshow(IN);
+    title('Imagen original de la fruta','fontsize',24);
+  
+    subplot(2,2,2);
+    imshow(bwimage);
+    title('Imagen binarizada','fontsize',24);
+    
     bordergrayim = imBorder(bwimage);
     
-    perimetroFruta = calculaPerimetro(bordergrayim);
+    subplot(2,2,3);
+    imshow(bordergrayim);
+    title('Imagen con mascara de Sobel','fontsize',24);
 
-    fprintf('La imagen contiene una fruta del tipo: %s.\n', frutaFinal);
+    
+    newImage = filtraGrises(bordergrayim,200);
+    subplot(2,2,4);
+    imshow(newImage);
+    title('Imagen bordeada con filtro de gris','fontsize',24);
+    
+    
+    perimetroFruta = calculaPerimetro(newImage);
+    
+    
+    
+
+    fprintf('La imagen contiene una fruta o frutas del tipo: %s.\n', frutaFinal);
     plural = isequal(strfind(colorFinal,','),[]);
     if(plural == 0)
-      fprintf('Los colores principales de la imagen son: %s.\n', colorFinal);
+      fprintf('Los colores principales de las frutas en la imagen son: %s.\n', colorFinal);
+      fprintf('Las frutas tienen un perimetro aproximado de %d pixeles.\n', perimetroFruta);
+      fprintf('Las frutas tienen un area aproximada de %d pixeles.\n', tam);
     else
-      fprintf('El color principal de la imagen es: %s.\n', colorFinal);
+      fprintf('El color principal de la fruta en la imagen es: %s.\n', colorFinal);
+      fprintf('La fruta tiene un perimetro de %d pixeles.\n', perimetroFruta);
+      fprintf('La fruta tiene un area aproximada de %d pixeles.\n', tam);
+
     endif
-    fprintf('La fruta tiene un perímetro de %d píxeles.\n', perimetroFruta);
 
 endfunction
