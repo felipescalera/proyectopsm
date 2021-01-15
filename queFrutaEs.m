@@ -1,8 +1,13 @@
-%% Función para sacar qué fruta es, pasando como entrada un histograma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Función para obtener qué tipo o tipos de fruta están presentes en una imagen                                           %%
+%%                                                                                                                        %%
+%% Entrada: hh=histograma de la imagen IN (con valores HLS), IN=imagen a tratar                                           %%
+%% Salida: imprime por pantalla el tipo de fruta y sus características (color, longitud del perímetro, y tamaño del área) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function queFrutaEs(hh,IN)
   
-  % Calcular el número de pixeles de color de la foto
+  % Inicializamos las variables para clasificar los píxeles del histograma
   pixelesParaFresa = 0;
   pixelesParaNaranja = 0;
   pixelesParaCereza = 0;
@@ -20,7 +25,7 @@ function queFrutaEs(hh,IN)
   pixelesRosas = 0;
   pixelesRojoOscuro = 0;
 
-  
+  % Recorremos todos los píxeles del histograma y obtenemos su total (suma) además de clasificarlos
   suma = 0;
   for i = 0:359
     suma = suma + hh(i+1);
@@ -61,6 +66,7 @@ function queFrutaEs(hh,IN)
       
   endfor
   
+  % Obtenemos el porcentaje de cada color para determinar el color o colores más presentes
   porcentajeColorRojoClaro = (pixelesRojoClaro/suma)*100;
   porcentajeColorNaranja = (pixelesNaranjas/suma)*100;
   porcentajeColorAmarillo = (pixelesAmarillos/suma)*100;
@@ -71,186 +77,183 @@ function queFrutaEs(hh,IN)
   porcentajeColorRojoOscuro = (pixelesRojoOscuro/suma)*100;
   colorFinal = 'Mezcla de frutas';
   
-    if ((porcentajeColorRojoClaro >= 40) && (porcentajeColorNaranja < 10) 
-      && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 16) && (porcentajeColorCyan < 10)
-      && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 16) && (porcentajeColorRosa < 10))
-      colorFinal = 'Rojo claro';
-    elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja >= 60) 
-      && (porcentajeColorAmarillo < 17) && (porcentajeColorVerde < 23) && (porcentajeColorCyan < 5)
-      && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
-      colorFinal = 'Naranja';
-    elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 40) 
-      && (porcentajeColorAmarillo >=52) && (porcentajeColorVerde < 5) && (porcentajeColorCyan < 5)
-      && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
-      colorFinal = 'Amarillo';
-    elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
-      && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde >= 8) && (porcentajeColorCyan < 5)
-      && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
-      colorFinal = 'Verde';
-    elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
-      && (porcentajeColorAmarillo < 5) && (porcentajeColorVerde < 5) && (porcentajeColorCyan >= 60)
-      && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
-      colorFinal = 'Cyan';
-    elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
-      && (porcentajeColorAmarillo < 5) && (porcentajeColorVerde < 5) && (porcentajeColorCyan < 5)
-      && (porcentajeColorAzulOscuro >= 80) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 10))
-      colorFinal = 'Azul oscuro';
-    elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
-      && (porcentajeColorAmarillo < 5) && (porcentajeColorVerde < 5) && (porcentajeColorCyan < 5)
-      && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa >= 60))
-      colorFinal = 'Rosa';
-    elseif ((porcentajeColorRojoClaro < 10) && (porcentajeColorNaranja < 5) 
-      && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 20) && (porcentajeColorCyan < 5)
-      && (porcentajeColorAzulOscuro < 7) && (porcentajeColorRojoOscuro >= 50) && (porcentajeColorRosa < 17))
-      colorFinal = 'Rojo oscuro';
-    endif
+  % Comprobamos los valores de los porcentajes de color y en función de ellos, asignamos un color (o 'Mezcla de frutas' en caso contrario)
+  if ((porcentajeColorRojoClaro >= 40) && (porcentajeColorNaranja < 10) 
+    && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 16) && (porcentajeColorCyan < 10)
+    && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 16) && (porcentajeColorRosa < 10))
+    colorFinal = 'Rojo claro';
+  elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja >= 60) 
+    && (porcentajeColorAmarillo < 17) && (porcentajeColorVerde < 23) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
+    colorFinal = 'Naranja';
+  elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 40) 
+    && (porcentajeColorAmarillo >=52) && (porcentajeColorVerde < 5) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
+    colorFinal = 'Amarillo';
+  elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
+    && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde >= 8) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
+    colorFinal = 'Verde';
+  elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
+    && (porcentajeColorAmarillo < 5) && (porcentajeColorVerde < 5) && (porcentajeColorCyan >= 60)
+    && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
+    colorFinal = 'Cyan';
+  elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
+    && (porcentajeColorAmarillo < 5) && (porcentajeColorVerde < 5) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAzulOscuro >= 80) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 10))
+    colorFinal = 'Azul oscuro';
+  elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
+    && (porcentajeColorAmarillo < 5) && (porcentajeColorVerde < 5) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa >= 60))
+    colorFinal = 'Rosa';
+  elseif ((porcentajeColorRojoClaro < 10) && (porcentajeColorNaranja < 5) 
+    && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 20) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAzulOscuro < 7) && (porcentajeColorRojoOscuro >= 50) && (porcentajeColorRosa < 17))
+    colorFinal = 'Rojo oscuro';
+  endif
     
-    
-    porcentajeFresa = (pixelesParaFresa/suma)*100;
-    porcentajeNaranja = (pixelesParaNaranja/suma)*100;
-    porcentajeCereza = (pixelesParaCereza/suma)*100;
-    porcentajePlatano = (pixelesParaPlatano/suma)*100;
-    porcentajeSandia = (pixelesParaSandia/suma)*100;
-    porcentajeLima = (pixelesParaLima/suma)*100;
-    porcentajeArandanos = (pixelesParaArandanos/suma)*100;
-    frutaFinal = '';
+  % Obtenemos el porcentaje de cada fruta para determinar el tipo o tipos presentes  
+  porcentajeFresa = (pixelesParaFresa/suma)*100;
+  porcentajeNaranja = (pixelesParaNaranja/suma)*100;
+  porcentajeCereza = (pixelesParaCereza/suma)*100;
+  porcentajePlatano = (pixelesParaPlatano/suma)*100;
+  porcentajeSandia = (pixelesParaSandia/suma)*100;
+  porcentajeLima = (pixelesParaLima/suma)*100;
+  porcentajeArandanos = (pixelesParaArandanos/suma)*100;
+  frutaFinal = '';
 
-    if(strcmp(colorFinal,'Mezcla de frutas') == 0)
-      if ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
-        && (porcentajeSandia < 5) && (porcentajeLima < 5) && (porcentajeArandanos >= 65))
-        frutaFinal = 'Arandanos';
-      elseif ((porcentajeFresa < 15) && (porcentajeNaranja < 5) && (porcentajeCereza >= 35) && (porcentajePlatano < 5)
-        && (porcentajeSandia < 15) && (porcentajeLima < 7) && (porcentajeArandanos < 5))
-        frutaFinal = 'Cereza';
-      elseif ((porcentajeFresa >= 45) && (porcentajeNaranja < 7) && (porcentajeCereza < 10) && (porcentajePlatano < 5)
-        && (porcentajeSandia < 15) && (porcentajeLima < 10) && (porcentajeArandanos < 5))
+  % Comprobamos si el color determinado es el correspondiente a una mezcla de frutas o no
+  if(strcmp(colorFinal,'Mezcla de frutas') == 0) % Si colorFinal NO es mezcla de frutas, comprobamos los porcentajes y asignamos un color
+    if ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
+      && (porcentajeSandia < 5) && (porcentajeLima < 5) && (porcentajeArandanos >= 65))
+      frutaFinal = 'Arandanos';
+    elseif ((porcentajeFresa < 15) && (porcentajeNaranja < 5) && (porcentajeCereza >= 35) && (porcentajePlatano < 5)
+      && (porcentajeSandia < 15) && (porcentajeLima < 7) && (porcentajeArandanos < 5))
+      frutaFinal = 'Cereza';
+    elseif ((porcentajeFresa >= 45) && (porcentajeNaranja < 7) && (porcentajeCereza < 10) && (porcentajePlatano < 5)
+      && (porcentajeSandia < 15) && (porcentajeLima < 10) && (porcentajeArandanos < 5))
+      frutaFinal = 'Fresas';
+    elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
+      && (porcentajeSandia < 20) && (porcentajeLima >= 75) && (porcentajeArandanos < 5))
+      frutaFinal = 'Lima';
+    elseif ((porcentajeFresa < 5) && (porcentajeNaranja >= 47) && (porcentajeCereza < 5) && (porcentajePlatano < 15)
+      && (porcentajeSandia < 20) && (porcentajeLima < 10) && (porcentajeArandanos < 5))
+      frutaFinal = 'Naranja';
+    elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 30) && (porcentajeCereza < 5) && (porcentajePlatano >= 50)
+      && (porcentajeSandia < 5) && (porcentajeLima < 5) && (porcentajeArandanos < 5))
+      frutaFinal = 'Platano';
+    elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
+      && (porcentajeSandia >= 45) && (porcentajeLima < 35) && (porcentajeArandanos < 5))
+      frutaFinal = 'Sandia';
+    endif
+  else % Si es una mexcla de frutas, comprobamos qué tipos de fruta la conforman y los vamos concatenando para obtener la mezcla como string
+    colorFinal = 'Mezcla de: ';
+    if (porcentajeArandanos > 12)
+      frutaFinal = 'Arandanos';
+      colorFinal = strcat(colorFinal, ' Azul oscuro');
+    endif
+    if (porcentajeCereza > 12)
+      if(strcmp(frutaFinal,'') == 1)
+        frutaFinal = 'Cerezas';
+        colorFinal = strcat(colorFinal, ' Rojo oscuro');
+      else
+        frutita = ', cerezas';
+        frutaFinal = strcat(frutaFinal, frutita);
+        colorFinal = strcat(colorFinal, ', rojo oscuro');
+      endif
+    endif
+    if (porcentajeFresa > 12)
+      if(strcmp(frutaFinal,'') == 1)
         frutaFinal = 'Fresas';
-      elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
-        && (porcentajeSandia < 20) && (porcentajeLima >= 75) && (porcentajeArandanos < 5))
+        colorFinal = strcat(colorFinal, ' Rojo claro');
+      else
+        frutita = ', fresas';
+        frutaFinal = strcat(frutaFinal, frutita);
+        colorFinal = strcat(colorFinal, ', rojo claro');
+      endif
+    endif
+    if (porcentajeLima > 15)
+      if(strcmp(frutaFinal,'') == 1)
         frutaFinal = 'Lima';
-      elseif ((porcentajeFresa < 5) && (porcentajeNaranja >= 47) && (porcentajeCereza < 5) && (porcentajePlatano < 15)
-        && (porcentajeSandia < 20) && (porcentajeLima < 10) && (porcentajeArandanos < 5))
+        colorFinal = strcat(colorFinal, ' Verde lima');
+      else
+        frutita = ', lima';
+        frutaFinal = strcat(frutaFinal, frutita);
+        colorFinal = strcat(colorFinal, ', verde lima');
+      endif
+    endif
+    if (porcentajeNaranja > 12)
+      if(strcmp(frutaFinal,'') == 1)
         frutaFinal = 'Naranja';
-      elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 30) && (porcentajeCereza < 5) && (porcentajePlatano >= 50)
-        && (porcentajeSandia < 5) && (porcentajeLima < 5) && (porcentajeArandanos < 5))
+        colorFinal = strcat(colorFinal, ' Naranja');
+      else
+        frutita = ', naranja';
+        frutaFinal = strcat(frutaFinal, frutita);
+        colorFinal = strcat(colorFinal, ', naranja');
+      endif
+    endif
+    if (porcentajePlatano > 12)
+      if(strcmp(frutaFinal,'') == 1)
         frutaFinal = 'Platano';
-      elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
-        && (porcentajeSandia >= 45) && (porcentajeLima < 35) && (porcentajeArandanos < 5))
+        colorFinal = strcat(colorFinal, ' Amarillo');
+      else
+        frutita = ', platano';
+        frutaFinal = strcat(frutaFinal, frutita);
+        colorFinal = strcat(colorFinal, ', amarillo');
+      endif
+    endif
+    if (porcentajeSandia > 15)
+      if(strcmp(frutaFinal,'') == 1)
         frutaFinal = 'Sandia';
-
-      endif
-    else
-      colorFinal = 'Mezcla de: ';
-      if (porcentajeArandanos > 12)
-        frutaFinal = 'Arandanos';
-        colorFinal = strcat(colorFinal, ' Azul oscuro');
-      endif
-      if (porcentajeCereza > 12)
-        if(strcmp(frutaFinal,'') == 1)
-          frutaFinal = 'Cerezas';
-          colorFinal = strcat(colorFinal, ' Rojo oscuro');
-        else
-          frutita = ', cerezas';
-          frutaFinal = strcat(frutaFinal, frutita);
-          colorFinal = strcat(colorFinal, ', rojo oscuro');
-        endif
-      endif
-      if (porcentajeFresa > 12)
-        if(strcmp(frutaFinal,'') == 1)
-          frutaFinal = 'Fresas';
-          colorFinal = strcat(colorFinal, ' Rojo claro');
-        else
-          frutita = ', fresas';
-          frutaFinal = strcat(frutaFinal, frutita);
-          colorFinal = strcat(colorFinal, ', rojo claro');
-        endif
-      endif
-      if (porcentajeLima > 15)
-        if(strcmp(frutaFinal,'') == 1)
-          frutaFinal = 'Lima';
-          colorFinal = strcat(colorFinal, ' Verde lima');
-        else
-          frutita = ', lima';
-          frutaFinal = strcat(frutaFinal, frutita);
-          colorFinal = strcat(colorFinal, ', verde lima');
-        endif
-      endif
-      if (porcentajeNaranja > 12)
-        if(strcmp(frutaFinal,'') == 1)
-          frutaFinal = 'Naranja';
-          colorFinal = strcat(colorFinal, ' Naranja');
-        else
-          frutita = ', naranja';
-          frutaFinal = strcat(frutaFinal, frutita);
-          colorFinal = strcat(colorFinal, ', naranja');
-        endif
-      endif
-      if (porcentajePlatano > 12)
-        if(strcmp(frutaFinal,'') == 1)
-          frutaFinal = 'Platano';
-          colorFinal = strcat(colorFinal, ' Amarillo');
-        else
-          frutita = ', platano';
-          frutaFinal = strcat(frutaFinal, frutita);
-          colorFinal = strcat(colorFinal, ', amarillo');
-        endif
-      endif
-      if (porcentajeSandia > 15)
-        if(strcmp(frutaFinal,'') == 1)
-          frutaFinal = 'Sandia';
-          colorFinal = ' Verde oscuro';
-        else
-          frutita = ', sandia';
-          frutaFinal = strcat(frutaFinal, frutita);
-          colorFinal = strcat(colorFinal, ', verde oscuro');
-        endif
+        colorFinal = ' Verde oscuro';
+      else
+        frutita = ', sandia';
+        frutaFinal = strcat(frutaFinal, frutita);
+        colorFinal = strcat(colorFinal, ', verde oscuro');
       endif
     endif
+  endif
     
-    % Sacar el perimetro a
-    grayim = rgb2gray(IN);
-    grayHisto = gHistogram(grayim,1);
-    threshold = MVThreshold(grayHisto);
-    [bwimage,tam] = Binarizacion(grayim, threshold);
+  % Obtenemos el perimetro y el area a traves de la binarizacion
+  grayim = rgb2gray(IN);
+  grayHisto = gHistogram(grayim,1);
+  threshold = MVThreshold(grayHisto);
+  [bwimage,tam] = Binarizacion(grayim, threshold);
     
-    figure(1);
-    subplot(2,2,1);
-    imshow(IN);
-    title('Imagen original de la fruta','fontsize',24);
+  figure(1);
+  subplot(2,2,1);
+  imshow(IN);
+  title('Imagen original de la fruta','fontsize',24);
   
-    subplot(2,2,2);
-    imshow(bwimage);
-    title('Imagen binarizada','fontsize',24);
+  subplot(2,2,2);
+  imshow(bwimage);
+  title('Imagen binarizada','fontsize',24);
     
-    bordergrayim = imBorder(bwimage);
+  bordergrayim = imBorder(bwimage);
     
-    subplot(2,2,3);
-    imshow(bordergrayim);
-    title('Imagen con mascara de Sobel','fontsize',24);
+  subplot(2,2,3);
+  imshow(bordergrayim);
+  title('Imagen con mascara de Sobel','fontsize',24);
 
     
-    newImage = filtraGrises(bordergrayim,200);
-    subplot(2,2,4);
-    imshow(newImage);
-    title('Imagen bordeada con filtro de gris','fontsize',24);
+  newImage = filtraGrises(bordergrayim,200);
+  subplot(2,2,4);
+  imshow(newImage);
+  title('Imagen bordeada con filtro de gris','fontsize',24);
+       
+  perimetroFruta = calculaPerimetro(newImage);
     
-    
-    perimetroFruta = calculaPerimetro(newImage);
-    
-    
-    
-
-    fprintf('La imagen contiene una fruta o frutas del tipo: %s.\n', frutaFinal);
-    plural = isequal(strfind(colorFinal,','),[]);
-    if(plural == 0)
-      fprintf('Los colores principales de las frutas en la imagen son: %s.\n', colorFinal);
-      fprintf('Las frutas tienen un perimetro aproximado de %d pixeles.\n', perimetroFruta);
-      fprintf('Las frutas tienen un area aproximada de %d pixeles.\n', tam);
-    else
-      fprintf('El color principal de la fruta en la imagen es: %s.\n', colorFinal);
-      fprintf('La fruta tiene un perimetro de %d pixeles.\n', perimetroFruta);
-      fprintf('La fruta tiene un area aproximada de %d pixeles.\n', tam);
-
-    endif
+  % Devolvemos por consola los valores obtenidos mediante la funcion
+  plural = isequal(strfind(colorFinal,','),[]);
+  if(plural == 0)
+     fprintf('Los colores principales de las frutas en la imagen son: %s.\n', colorFinal);
+     fprintf('Las frutas tienen un perimetro aproximado de %d pixeles.\n', perimetroFruta);
+     fprintf('Las frutas tienen un area aproximada de %d pixeles.\n', tam);
+  else
+     fprintf('El color principal de la fruta en la imagen es: %s.\n', colorFinal);
+     fprintf('La fruta tiene un perimetro de %d pixeles.\n', perimetroFruta);
+     fprintf('La fruta tiene un area aproximada de %d pixeles.\n', tam);
+  endif
+  fprintf('La imagen contiene una fruta o frutas del tipo: %s.\n', frutaFinal);
 
 endfunction
