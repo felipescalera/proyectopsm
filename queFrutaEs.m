@@ -197,7 +197,7 @@ function tipoFruta = queFrutaEs(hh,IN)
       if (porcentajeSandia > 15)
         if(strcmp(frutaFinal,'') == 1)
           frutaFinal = 'Sandia';
-          colorFinal = strcat(colorFinal, ' Verde oscuro');
+          colorFinal = ' Verde oscuro';
         else
           frutita = ', sandia';
           frutaFinal = strcat(frutaFinal, frutita);
