@@ -78,7 +78,7 @@ function queFrutaEs(hh,IN)
   colorFinal = 'Mezcla de frutas';  
   %Se inicializa el color final en este flag, si no se clasifica el color, diremos que es una mezcla de frutas
   
-  % Comprobamos los valores de los porcentajes de color y en función de ellos, asignamos un color (o 'Mezcla de frutas' en caso contrario)
+  % Comprobamos los valores de los porcentajes de color y en función de ellos, asignamos un color ('Mezcla de frutas' en caso contrario)
   if ((porcentajeColorRojoClaro >= 40) && (porcentajeColorNaranja < 10) 
     && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 16) && (porcentajeColorCyan < 10)
     && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 16) && (porcentajeColorRosa < 10))
@@ -92,7 +92,7 @@ function queFrutaEs(hh,IN)
     && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
     colorFinal = 'Amarillo';
   elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
-    && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde >= 8) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde >= 40) && (porcentajeColorCyan < 5)
     && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
     colorFinal = 'Verde';
   elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja < 5) 
@@ -234,7 +234,7 @@ function queFrutaEs(hh,IN)
   title('Imagen binarizada','fontsize',24);
     
   %Creamos una imagen con bordes usando la mascara de Sobel
-  bordergrayim = imBorder(bwimage);
+  bordergrayim = imBorder(bwimage);%%%%%%%%%%%%%%%%%%%%%%%%
     
   subplot(2,2,3);
   imshow(bordergrayim);
