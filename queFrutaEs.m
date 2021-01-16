@@ -249,7 +249,8 @@ function queFrutaEs(hh,IN)
   perimetroFruta = calculaPerimetro(newImage);
     
   % Devolvemos por consola los valores obtenidos mediante la funcion
-  plural = isequal(strfind(colorFinal,','),[]);
+  plural = isequal(strfind(colorFinal,','),[]); 
+  %Si hay más de un color, será multifruta, entonces ajustamos la impresión
   if(plural == 0)
      fprintf('Los colores principales de las frutas en la imagen son: %s.\n', colorFinal);
      fprintf('Las frutas tienen un perimetro aproximado de %d pixeles.\n', perimetroFruta);
