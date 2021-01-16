@@ -25,13 +25,13 @@ function queFrutaEs(hh,IN)
   pixelesRosas = 0;
   pixelesRojoOscuro = 0;
 
-  % Recorremos todos los píxeles del histograma y obtenemos su total (suma) además de clasificarlos
+  % Recorremos todos los píxeles del histograma y obtenemos su total (suma) ademas de clasificarlos
   suma = 0;
   for i = 0:359
-    suma = suma + hh(i+1);
+    suma = suma + hh(i+1);   %Sumamos todos los pixeles a color
    
-    if ((i >= 96) && (i <= 134)) || ((i >= 65) && (i <= 78))
-      pixelesParaSandia = pixelesParaSandia + hh(i+1); 
+    if ((i >= 96) && (i <= 134)) || ((i >= 65) && (i <= 78))  %Ajustamos por un rango lo que consideramos una fruta concreta
+      pixelesParaSandia = pixelesParaSandia + hh(i+1);        %Y sumamos los pixeles incluidos en este rango
     elseif (i >= 79) && (i <= 95)
       pixelesParaLima = pixelesParaLima + hh(i+1);
     elseif (i >= 0) && (i <= 15)
@@ -46,7 +46,7 @@ function queFrutaEs(hh,IN)
       pixelesParaCereza = pixelesParaCereza + hh(i+1);
     endif
     
-    if (i >= 0) && (i <= 15)
+    if (i >= 0) && (i <= 15)                        %Tambien estamos incluyendo un sumatorio para los colores según un rango
       pixelesRojoClaro = pixelesRojoClaro + hh(i+1); 
     elseif (i >= 16) && (i <= 38)
       pixelesNaranjas = pixelesNaranjas + hh(i+1);
@@ -66,7 +66,7 @@ function queFrutaEs(hh,IN)
       
   endfor
   
-  % Obtenemos el porcentaje de cada color para determinar el color o colores más presentes
+  % Obtenemos el porcentaje de cada color para determinar el color o colores mas presentes
   porcentajeColorRojoClaro = (pixelesRojoClaro/suma)*100;
   porcentajeColorNaranja = (pixelesNaranjas/suma)*100;
   porcentajeColorAmarillo = (pixelesAmarillos/suma)*100;
@@ -75,13 +75,14 @@ function queFrutaEs(hh,IN)
   porcentajeColorAzulOscuro = (pixelesAzulOscuro/suma)*100;
   porcentajeColorRosa = (pixelesRosas/suma)*100;
   porcentajeColorRojoOscuro = (pixelesRojoOscuro/suma)*100;
-  colorFinal = 'Mezcla de frutas';
+  colorFinal = 'Mezcla de frutas';  
+  %Se inicializa el color final en este flag, si no se clasifica el color, diremos que es una mezcla de frutas
   
   % Comprobamos los valores de los porcentajes de color y en función de ellos, asignamos un color (o 'Mezcla de frutas' en caso contrario)
   if ((porcentajeColorRojoClaro >= 40) && (porcentajeColorNaranja < 10) 
     && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 16) && (porcentajeColorCyan < 10)
     && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 16) && (porcentajeColorRosa < 10))
-    colorFinal = 'Rojo claro';
+    colorFinal = 'Rojo claro';    %Asignamos el color de la fruta segun los rangos
   elseif ((porcentajeColorRojoClaro < 5) && (porcentajeColorNaranja >= 60) 
     && (porcentajeColorAmarillo < 17) && (porcentajeColorVerde < 23) && (porcentajeColorCyan < 5)
     && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa < 5))
@@ -112,7 +113,7 @@ function queFrutaEs(hh,IN)
     colorFinal = 'Rojo oscuro';
   endif
     
-  % Obtenemos el porcentaje de cada fruta para determinar el tipo o tipos presentes  
+  % Obtenemos el porcentaje de pixeles relevantes de cada fruta para determinar el tipo o tipos presentes  
   porcentajeFresa = (pixelesParaFresa/suma)*100;
   porcentajeNaranja = (pixelesParaNaranja/suma)*100;
   porcentajeCereza = (pixelesParaCereza/suma)*100;
@@ -146,18 +147,18 @@ function queFrutaEs(hh,IN)
       && (porcentajeSandia >= 45) && (porcentajeLima < 35) && (porcentajeArandanos < 5))
       frutaFinal = 'Sandia';
     endif
-  else % Si es una mexcla de frutas, comprobamos qué tipos de fruta la conforman y los vamos concatenando para obtener la mezcla como string
+  else % Si es una mezcla de frutas, comprobamos qué tipos de fruta la conforman y los vamos concatenando para obtener la mezcla como string
     colorFinal = 'Mezcla de: ';
-    if (porcentajeArandanos > 12)
+    if (porcentajeArandanos > 12)  %Comprobamos los porcentajes de cada fruta y fijamos los valores
       frutaFinal = 'Arandanos';
       colorFinal = strcat(colorFinal, ' Azul oscuro');
     endif
     if (porcentajeCereza > 12)
-      if(strcmp(frutaFinal,'') == 1)
+      if(strcmp(frutaFinal,'') == 1)  
         frutaFinal = 'Cerezas';
         colorFinal = strcat(colorFinal, ' Rojo oscuro');
       else
-        frutita = ', cerezas';
+        frutita = ', cerezas';   %Tenemos un if que comprueba si ya hemos añadido una fruta, a fin de imprimir una cadena formateada
         frutaFinal = strcat(frutaFinal, frutita);
         colorFinal = strcat(colorFinal, ', rojo oscuro');
       endif
@@ -214,10 +215,13 @@ function queFrutaEs(hh,IN)
     endif
   endif
     
-  % Obtenemos el perimetro y el area a traves de la binarizacion
+  % Obtenemos la imagen en gris
   grayim = rgb2gray(IN);
+  % Sacamos el histograma a gris de la imagen
   grayHisto = gHistogram(grayim,1);
-  threshold = MVThreshold(grayHisto);
+  % Calculamos el umbral promedio para la binarizacion
+  threshold = MVThreshold(grayHisto); %Tenemos en cuenta que es bimodal
+  %Sacamos la imagen binarizada y el tamaño de la fruta, sacando los pixeles que son blancos 
   [bwimage,tam] = Binarizacion(grayim, threshold);
     
   figure(1);
@@ -229,14 +233,15 @@ function queFrutaEs(hh,IN)
   imshow(bwimage);
   title('Imagen binarizada','fontsize',24);
     
+  %Creamos una imagen con bordes usando la mascara de Sobel
   bordergrayim = imBorder(bwimage);
     
   subplot(2,2,3);
   imshow(bordergrayim);
   title('Imagen con mascara de Sobel','fontsize',24);
 
-    
-  newImage = filtraGrises(bordergrayim,200);
+  %Filtramos los bordes de la imagen para eliminar los grises impuros
+  newImage = filtraGrises(bordergrayim,180);
   subplot(2,2,4);
   imshow(newImage);
   title('Imagen bordeada con filtro de gris','fontsize',24);

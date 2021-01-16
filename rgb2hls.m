@@ -1,38 +1,23 @@
-function [h, l, s] = rgb2hls(r,g,b)
-
-
+function [h, l, s] = rgb2hls(r,g,b)   
+%Algoritmo visto en clase, simplemente hace la conversion de RGB a HLS
 
 pixel = [r, g, b];
-
-
 
 maxval = max( pixel );
 
 minval = min( pixel );
 
-
-
 l = ( maxval + minval ) /2;
-
-
 
 aux = maxval - minval;
 
 if maxval == minval 
 
-  
-
  s = 0;
-
-  
 
 elseif l <= 0.5
 
-  
-
  s = aux / (2*l );
-
-  
 
 else
 

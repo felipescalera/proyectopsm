@@ -1,5 +1,3 @@
-%% La he hecho para que devuelva como salida el vector hh
-
 function salida = HLSconvVECTOR(IN)
 R = IN(:,:,1); 
 
@@ -15,13 +13,13 @@ Gnorm = normaliza(G);
 
 Bnorm = normaliza(B);
 
-
+%%Hasta aqui hemos medido los canales RGB y los hemos normalizado
 
 for ind=1:filas
 
   for jnd=1:cols
-
-   [h, l, s] = rgb2hls(Rnorm(ind, jnd), Gnorm(ind, jnd), Bnorm(ind, jnd)); %Completar la funcion rgb2hls
+   %Para cada pixel, vamos a medir el rango HLS, aplicando el algoritmo basico de conversion
+   [h, l, s] = rgb2hls(Rnorm(ind, jnd), Gnorm(ind, jnd), Bnorm(ind, jnd)); 
 
    H(ind, jnd) = h;
 
@@ -34,17 +32,17 @@ for ind=1:filas
 endfor
 
 
-
+%Ajustamos los valores de H, para que no se desborde
 H = round( H ); H( H == 360 ) = 0; H = H(:);
 
 hh = zeros( 360, 1 );
 
-for i = 0 : 359
+for i = 0 : 359  %Creamos el histograma
 
  hh( i + 1 ) = sum( H == i );
 
 end
 
-salida = hh;
+salida = hh;  %%Damos como salida el vector del histograma
 
 endfunction

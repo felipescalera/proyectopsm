@@ -1,6 +1,6 @@
-function [umbral, mu1, mu2] = MVThreshold(histo) 
+function [umbral, mu1, mu2] = MVThreshold(histo) %Umbral promedio para la binarizacion
 
-% El algoritmo presupone que el histograma es Binodal
+% El algoritmo presupone que el histograma es Binodal 
 
 % Devuelve el umbral y la posición de los máximos de 
 

@@ -3,7 +3,6 @@ clear all;
 
 IN=imread('frutas/arandanos.jpg');
 hh=HLSconvVECTOR(IN);
-[OUT,PER]=queFrutaEs(hh,IN);
 queFrutaEs(hh,IN);
 
 IN1=imread('frutas/cerezas.jpg');
@@ -28,12 +27,12 @@ OUT4=queFrutaEs(hh4,IN4);
 
 IN5=imread('frutas/platano.jpg');
 hh5=HLSconvVECTOR(IN5);
-OUT5=queFrutaEs(hh5,IN5);
+queFrutaEs(hh5,IN5);
 
 
-IN51=imread('frutas/platano2.jpg');
+IN=imread('frutas/platano2.jpg');
 hh51=HLSconvVECTOR(IN51);
-OUT51=queFrutaEs(hh51,IN51);
+queFrutaEs(hh51,IN51);
 
 tic
 IN6=imread('frutas/sandia.jpg');
@@ -57,6 +56,9 @@ IN73=imread('frutas/ultimaprueba.jpg');
 hh73=HLSconvVECTOR(IN73);
 OUT73=queFrutaEs(hh73,IN73);
 
+%Leemos la imagen
 IN74=imread('frutas/combinacionfrutas4.jpg');
+%Obtenemos el histograma a color de la imagen
 hh74=HLSconvVECTOR(IN74);
+%Identificamos sus caracteristicas principales
 OUT74=queFrutaEs(hh74,IN74);
