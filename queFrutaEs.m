@@ -241,7 +241,7 @@ function queFrutaEs(hh,IN)
   title('Imagen con mascara de Sobel','fontsize',24);
 
   %Filtramos los bordes de la imagen para eliminar los grises impuros
-  newImage = filtraGrises(bordergrayim,180);
+  newImage = filtraGrises(bordergrayim,150);
   subplot(2,2,4);
   imshow(newImage);
   title('Imagen bordeada con filtro de gris','fontsize',24);

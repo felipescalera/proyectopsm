@@ -23,7 +23,6 @@ for i=1:filas
 
 endfor
 
-[filas, cols, canales]=size(image);
-tam = filas*cols-acum; %Obtenemos el tamaño de la imagen binarizada restandole al total de la imagen lo acumulado
+tam = acum; %Obtenemos el tamaño de la imagen binarizada
 
 end

@@ -49,23 +49,6 @@ endfunction
 % R(n,m)	- Imagen resultante
 
 
-
-
-
-##IN = imread('eye.jpg'); %modificar por el alumno
-
-##[filas, cols, canales] = size(IN);
-
-##mask = [1 1 1; 1 1 1; 1 1 1]/9;
-
-##
-
-##imagen = single(IN);
-
-##mask = single(mask);
-
-
-
 function R = imConvolve(imagen, mask)
 
 
