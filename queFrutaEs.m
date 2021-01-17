@@ -42,7 +42,7 @@ function queFrutaEs(hh,IN)
       pixelesParaPlatano = pixelesParaPlatano + hh(i+1);
     elseif (i >= 214) && (i <= 228)
       pixelesParaArandanos = pixelesParaArandanos + hh(i+1);
-    elseif (i >= 345) && (i <= 357)
+    elseif (i >= 335) && (i <= 357)
       pixelesParaCereza = pixelesParaCereza + hh(i+1);
     endif
     
@@ -60,7 +60,7 @@ function queFrutaEs(hh,IN)
       pixelesAzulOscuro = pixelesAzulOscuro + hh(i+1);
     elseif (i >= 251) && (i <= 330)
       pixelesRosas = pixelesRosas + hh(i+1);
-    elseif (i >= 331) && (i <= 359)
+    elseif (i >= 330) && (i <= 359)
       pixelesRojoOscuro = pixelesRojoOscuro + hh(i+1);
     endif
       
@@ -108,7 +108,7 @@ function queFrutaEs(hh,IN)
     && (porcentajeColorAzulOscuro < 5) && (porcentajeColorRojoOscuro < 5) && (porcentajeColorRosa >= 60))
     colorFinal = 'Rosa';
   elseif ((porcentajeColorRojoClaro < 10) && (porcentajeColorNaranja < 5) 
-    && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 20) && (porcentajeColorCyan < 5)
+    && (porcentajeColorAmarillo < 10) && (porcentajeColorVerde < 20) && (porcentajeColorCyan < 10)
     && (porcentajeColorAzulOscuro < 7) && (porcentajeColorRojoOscuro >= 50) && (porcentajeColorRosa < 17))
     colorFinal = 'Rojo oscuro';
   endif
@@ -128,10 +128,10 @@ function queFrutaEs(hh,IN)
     if ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
       && (porcentajeSandia < 5) && (porcentajeLima < 5) && (porcentajeArandanos >= 65))
       frutaFinal = 'Arandanos';
-    elseif ((porcentajeFresa < 15) && (porcentajeNaranja < 5) && (porcentajeCereza >= 35) && (porcentajePlatano < 5)
+    elseif ((porcentajeFresa < 15) && (porcentajeNaranja < 5) && (porcentajeCereza >= 35) && (porcentajePlatano < 8)
       && (porcentajeSandia < 15) && (porcentajeLima < 7) && (porcentajeArandanos < 5))
       frutaFinal = 'Cereza';
-    elseif ((porcentajeFresa >= 45) && (porcentajeNaranja < 7) && (porcentajeCereza < 10) && (porcentajePlatano < 5)
+    elseif ((porcentajeFresa >= 45) && (porcentajeNaranja < 7) && (porcentajeCereza < 10) && (porcentajePlatano < 10)
       && (porcentajeSandia < 15) && (porcentajeLima < 10) && (porcentajeArandanos < 5))
       frutaFinal = 'Fresas';
     elseif ((porcentajeFresa < 5) && (porcentajeNaranja < 5) && (porcentajeCereza < 5) && (porcentajePlatano < 5)
