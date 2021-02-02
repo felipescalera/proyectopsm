@@ -10,7 +10,7 @@
 % 
 % También devuelve los puntos muestrales donde se encuentra la referencia de cada ventana
 
-function [MatVen pos] = block ( Mat, L, D) 
+function MatVen = block ( Mat, L, D) 
 
 		%------ Comprobamos que la matriz Mat es unidmensional y tipo fila ----
 [m, n] = size(Mat); 
