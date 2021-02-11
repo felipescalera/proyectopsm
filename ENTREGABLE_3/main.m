@@ -14,7 +14,7 @@ len_audio=length(audio_leido); %Duración del audio
 n=(0:len_audio-1);
 figure();
 plot(n,audio_leido);
-title('"Antonio Viñuelas Perales"','fontsize',24);
+title('"Viñuelas Perales"','fontsize',24);
 xlabel("n",'fontsize',24);
 ylabel("s[n]",'fontsize',24);
 
@@ -24,7 +24,7 @@ len_audio_1=length(audio_leido_1);
 n_1=(0:len_audio_1-1);
 figure();
 plot(n_1,audio_leido_1);
-title('"Antonio Viñuelas Perales" recortado','fontsize',24);
+title('"Viñuelas Perales" recortado','fontsize',24);
 xlabel("n",'fontsize',24);
 ylabel("s[n]",'fontsize',24);
 
@@ -100,7 +100,7 @@ correlacion = xcorr(x) (length(x):end);
 figure();
 stem(correlacion(1:1000));
 title('Correlación de sonido sonoro','fontsize',24);
-xlabel("n",'n',24);
+xlabel("n",'fontsize',24);
 ylabel("correlacion[n]",'fontsize',24);
 
 kmin = 50;
@@ -121,7 +121,7 @@ correlacion = xcorr(x) (length(x):end);
 figure();
 stem(correlacion(1:1000));
 title('Correlación de sonido sordo','fontsize',24);
-xlabel("n",'n',24);
+xlabel("n",'fontsize',24);
 ylabel("correlacion[n]",'fontsize',24);
 
 kmin = 50;
@@ -138,7 +138,7 @@ correlacion = xcorr(x) (length(x):end);
 figure();
 stem(correlacion(1:1000));
 title('Correlación de sonido silencio','fontsize',24);
-xlabel("n",'n',24);
+xlabel("n",'fontsize',24);
 ylabel("correlacion[n]",'fontsize',24);
 
 kmin = 50;
